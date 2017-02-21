@@ -1,21 +1,30 @@
-//hard-coded script
+//Change your code so that it takes the user's input and makes the 
+//AJAX request based on that input.
 
+//user-input script
+/*e.g 
+0345803485
+1442486805
+*/
 
 var source = $('#ebook-template').html();
 var template = Handlebars.compile(source);
 
+//func takes user argument
+ var searchIsbn = function () {
+    var isbnNum = $(".search").val();
+    $(".search").val("");//clear input field
+    fetch(isbnNum); //invoke fetch function
+  };
 
 
-//the func takes an object as an argument 
-var fetch = function () {
+var fetch = function (isbnNum) {
   $.ajax({ //ajax method to make asynchronous requests easy
     method: "GET",
-    url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:0439023521',
+    url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbnNum,
     dataType: "json",
 
     success: function(data) { //callback function that runs when request succeeds
-      //console.log(data);
-      //accessing properties of the object
 
      var previewBook = function(){ //inner callback function
             var title = data.items[0].volumeInfo.title; //objectName.objectArray[index].property.innerProperty
@@ -38,16 +47,13 @@ var fetch = function () {
           };
 
     previewBook(); //invoking function
-
-        //tests     
-        //alert(book[0].title); check to see that my new object works! 
-        //console.log("book title is " + title + " written by " + author + "     that's the description: " + "  " + description);
-    },//end of previewBook function
+    
+    }, //end of success function
 
     //callback function that runs when request fails 
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(textStatus);
     }    
-  }); 
-};
+  }); //end of $ajax
+}; //enf of fetch function
 
