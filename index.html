@@ -11,17 +11,32 @@
   <h1>BookLook
       <i class="fa fa-eye" aria-hidden="true"></i>
   </h1>
+  
+  <hr>
+  
+  <div class="preview"></div>
 
-<hr>
+  <hr>
+  
   <form>
   <h4>Search by ISBN</h4>
   <input class="search" type="text" placeholder="ISBN number"><br><br>
-
   <button type="button" onclick="fetch()" class="btn btn-primary">search</button>
   </form>
 </div>
 
+<script id="ebook-template" type="text/x-handlebars-template">
+     <div>
+          <h3> {{ title }} </h3>
+          <section class="description-container">{{description}} </section>
+          <h4>Written by: {{author}}</h4>
+          <img src={{image}}/>
+    </div>  
+</script>
+
+
 <script src="node_modules/jquery/dist/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 <script type="text/javascript" src="script.js"> </script>
 </body>
 </html>
