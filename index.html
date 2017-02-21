@@ -16,11 +16,10 @@
   
   <div class="preview"></div>
 
-  <hr>
   
   <form>
   <h4>Search by ISBN</h4>
-  <input class="search" type="text" placeholder="ISBN number"><br><br>
+  <input class="search" type="text" placeholder="ISBN number" maxlength="10"><br><br>
   <button type="button" onclick="searchIsbn()" class="btn btn-primary">search</button>
   </form>
 </div>
@@ -28,8 +27,9 @@
 <script id="ebook-template" type="text/x-handlebars-template">
      <div>
           <h3> {{ title }} </h3>
+          <h5>isbn: {{isbn}}</h5>
           <section class="description-container">{{description}} </section>
-          <h4>Written by: {{author}}</h4>
+          <h4>Written by: {{authors}}</h4>
           <img src={{image}}/>
     </div>  
 </script>

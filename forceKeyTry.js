@@ -3,7 +3,6 @@
 
 //user-input script
 /*e.g 
-0801838428
 0345803485
 1442486805
 0857510606
@@ -12,17 +11,22 @@
 var source = $('#ebook-template').html();
 var template = Handlebars.compile(source);
 
-//func takes user argument
- var searchIsbn = function () {
-    var isbnNum = $(".search").val();
 
+
+//func takes user argument
+ var searchIsbn = function () {    
     if ($(".search").val().length > 0){
          fetch(isbnNum); 
-    } else {alert("please fill in ISBN")};
+    } else {alert("please fill in ISBN")}
 
     $(".search").val("");//clear input field
   };
 
+//function made to force keyEnter and mouse submit 
+  function getInfo() {
+         var isbnNum = $(".search").val();
+         searchIsbn(); //invoking func
+     }; 
 
 var fetch = function (isbnNum) {
   $.ajax({ //ajax method to make asynchronous requests easy
@@ -31,20 +35,18 @@ var fetch = function (isbnNum) {
     dataType: "json",
 
     success: function(data) { //callback function that runs when request succeeds
-      console.log(data);
+
      var previewBook = function(){ //inner callback function
             var title = data.items[0].volumeInfo.title; //objectName.objectArray[index].property.innerProperty
-            var authors = data.items[0].volumeInfo.authors;
+            var author = data.items[0].volumeInfo.authors[0];
             var description = data.items[0].volumeInfo.description;
             var image = data.items[0].volumeInfo.imageLinks.thumbnail;
-            var isbn = data.items[0].volumeInfo.industryIdentifiers[1].identifier;
-
+            
             var book = {
                  title: title,
                  description: description,
-                 authors: authors,
-                 image:image,
-                 isbn:isbn
+                 author: author,
+                 image:image
             };
 
             var newHTML = template(book);
@@ -63,5 +65,17 @@ var fetch = function (isbnNum) {
         console.log(textStatus);
     }    
   }); //end of $ajax
-}; //enf of fetch function
+}; //end of fetch function
+
+//mouse click button
+$("#submit").on("click", function(e){
+    getInfo();
+});
+
+//Enter keyboard
+$("#form").bind("keypress", function(e) {
+   if (e.keyCode === 13) {
+      getInfo();
+   }
+});
 

@@ -1,0 +1,16 @@
+checklist:
+
+- clear input field 
+- force enter key to button
+- rating 
+- input isbn or title - define var isbn and the if should be with Nan
+
+- popup darken - fancybox
+
+
+did:
+
+- add isbn 
+- check that input isnt null 
+- multiple authors 
+
