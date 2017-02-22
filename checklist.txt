@@ -2,13 +2,15 @@ checklist:
 
 must:
 
-- input isbn or title - define var isbn and the if should be with Nan
 
 
 extra mile:
 - force enter key to button
 - popup darken - fancybox
 - convert the rating numeric data onto my lovely html stars
+- validate thumbnail or rating (if not exist)
+- validate 10 digit or 13 digit isbn
+- search author
 
 did:
 
@@ -17,4 +19,5 @@ did:
 - check that input isnt null 
 - multiple authors 
 - rating 
+- search via input isbn or title
 

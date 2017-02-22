@@ -14,31 +14,51 @@ var template = Handlebars.compile(source);
 
 //func takes user argument
  var searchIsbn = function () {
-    var isbnNum = $(".search").val();
+    var url;
+    //isisbn = (!isNaN(query) && (query.length == 10 || query.length==13));
 
     if ($(".search").val().length > 0){
-         fetch(isbnNum); 
-    } else {alert("please fill in ISBN")};
+
+      if (isNaN(parseInt($(".search").val()))) {
+          console.log("non-parsing fix");
+          var getTitle = $(".search").val();
+          url = 'https://www.googleapis.com/books/v1/volumes?q=intitle:' + getTitle;
+          fetch(url);
+      } else {
+          console.log("this is a number?");
+          var isbnNum = $(".search").val();
+          url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbnNum;
+          fetch(url);
+      }
+    } else { 
+        alert("please fill in ISBN or title"); }
 
     $(".search").val("");//clear input field
-  };
+};
 
+// 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbnNum + '&q=intitle:' + getTitle
 
-var fetch = function (isbnNum) {
+var fetch = function (url) {
   $.ajax({ //ajax method to make asynchronous requests easy
     method: "GET",
-    url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbnNum,
+    url: url,
     dataType: "json",
 
     success: function(data) { //callback function that runs when request succeeds
       console.log(data);
      var previewBook = function(){ //inner callback function
+          
             var title = data.items[0].volumeInfo.title; //objectName.objectArray[index].property.innerProperty
             var authors = data.items[0].volumeInfo.authors;
             var description = data.items[0].volumeInfo.description;
             var image = data.items[0].volumeInfo.imageLinks.thumbnail;
             var isbn = data.items[0].volumeInfo.industryIdentifiers[1].identifier;
             var rating = data.items[0].volumeInfo.averageRating;
+
+
+            //users can search for books based on the title.
+            // Display a list of the first 10 books the response returns, 
+
 
             // I wanna convert the rating numeric data onto my lovely html stars
             // for (var i = 0; i < 5; i++) {
