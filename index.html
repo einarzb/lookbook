@@ -20,7 +20,8 @@
   <form>
   <h4>Search by ISBN</h4>
   <input class="search" type="text" placeholder="ISBN number" maxlength="10"><br><br>
-  <button type="button" onclick="searchIsbn()" class="btn btn-primary">search</button>
+  <button type="button" onclick="searchIsbn()" class="btn btn-primary">search</button>&nbsp;
+  <a href="https://books.google.com/" class="btn btn-primary" target="blank">find your book's ISBN</a>
   </form>
 </div>
 
@@ -30,7 +31,8 @@
           <p> <b>isbn:</b> #{{isbn}} </p>
           <section class="description-container">{{description}} </section>
           <h5>Written by: {{authors}}</h5>
-          <img src={{image}}/>
+          <img src={{image}}/> 
+          <p>rating is: {{rating}}</p>
     </div>  
 </script>
 

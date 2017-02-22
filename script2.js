@@ -2,7 +2,7 @@
 //AJAX request based on that input.
 
 //user-input script
-/*e.g 
+/*e.g isbn
 0801838428
 0345803485
 1442486805
@@ -38,13 +38,25 @@ var fetch = function (isbnNum) {
             var description = data.items[0].volumeInfo.description;
             var image = data.items[0].volumeInfo.imageLinks.thumbnail;
             var isbn = data.items[0].volumeInfo.industryIdentifiers[1].identifier;
+            var rating = data.items[0].volumeInfo.averageRating;
 
+            // I wanna convert the rating numeric data onto my lovely html stars
+            // for (var i = 0; i < 5; i++) {
+            //   rating[i]
+            // };
+            // if (rating === 5) {
+            //   rating = innerHTML("0857510606");
+            // }else{alert("bkbkb");
+            // };
+
+            console.log(rating);
             var book = {
                  title: title,
                  description: description,
                  authors: authors,
                  image:image,
-                 isbn:isbn
+                 isbn:isbn,
+                 rating: rating
             };
 
             var newHTML = template(book);

@@ -1,16 +1,20 @@
 checklist:
 
-- clear input field 
-- force enter key to button
-- rating 
+must:
+
 - input isbn or title - define var isbn and the if should be with Nan
 
-- popup darken - fancybox
 
+extra mile:
+- force enter key to button
+- popup darken - fancybox
+- convert the rating numeric data onto my lovely html stars
 
 did:
 
+- clear input field 
 - add isbn 
 - check that input isnt null 
 - multiple authors 
+- rating 
 
